@@ -27,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    DatabaseManager dbManger;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       dbManger = new DatabaseManager(this);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -86,8 +88,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(LoginActivity.this, MainMenu.class));
-                //attemptLogin();
+
+                attemptLogin();
             }
         });
 
@@ -207,18 +209,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
+            startActivity(new Intent(LoginActivity.this, MainMenu.class));
             mAuthTask.execute((Void) null);
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        //Issue with Login comparing to database
+      if(dbManger.searchForEmail(email)) {
+          Toast.makeText(this, "Its True", Toast.LENGTH_SHORT).show();
+
+          return true;
+      }else{
+          return false;
+      }
+
+
+
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        if(dbManger.searchForPassWord(password)) {
+            Toast.makeText(this, "Its True", Toast.LENGTH_SHORT).show();
+
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     /**
