@@ -13,8 +13,7 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TextView top = new TextView(this);
-        top = (TextView) findViewById(R.id.editText);
+
         setContentView(R.layout.activity_main_menu);
     }
 

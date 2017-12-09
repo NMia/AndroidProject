@@ -69,13 +69,11 @@ public class Statistics {
         this.draws = draws;
     }
     public String toString() {
-        return "Statistics{" +
-                "ID=" + ID +
-                ", wins=" + wins +
-                ", losses=" + losses +
-                ", reRolls=" + reRolls +
-                ", score=" + score +
-                ", draws=" + draws +
-                '}';
+        return "Statistics\n" +
+                "\nID = \t" + ID +
+                "\nScore \t= " + score +
+                "\n" + wins + " wins" +
+                "\n" + losses + " losses" +
+                "\n" + reRolls + " re-rolls ";
     }
 }
