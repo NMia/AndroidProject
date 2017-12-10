@@ -33,6 +33,14 @@ public class GameActivity extends Activity implements GestureDetector.OnGestureL
     }
 
 
+
+
+
+
+
+
+
+
     // Gestures - should roll dice ONLY through onFling - other methods unintentionally change the results too quickly/easily
     @Override
     public boolean onTouchEvent(MotionEvent event){
